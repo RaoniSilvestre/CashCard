@@ -18,8 +18,10 @@ class CashCardController {
   }
 
   @GetMapping("/{requestedId}")
-  private ResponseEntity<CashCard> findById(@PathVariable Long requestedId) {
+  public ResponseEntity<CashCard> findById(@PathVariable Long requestedId) {
     Optional<CashCard> cashCardOptional = cashCardRepository.findById(requestedId);
+    Iterable<CashCard> x = cashCardRepository.findAll();
+    System.out.println(x);
 
     if (cashCardOptional.isPresent()) {
       return ResponseEntity.ok(cashCardOptional.get());

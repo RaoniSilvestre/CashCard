@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.12'
 	id 'io.spring.dependency-management' version '1.1.5'
+
 }
 
 group = 'example'
@@ -15,9 +16,24 @@ repositories {
 	mavenCentral()
 }
 
+test {
+ testLogging {
+     events "passed", "skipped", "failed" //, "standardOut", "standardError"
+
+     showExceptions true
+     exceptionFormat "full"
+     showCauses true
+     showStackTraces true
+
+     // Change from false to true
+     showStandardStreams = true
+ }
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  
   implementation 'org.springframework.data:spring-data-jdbc'
   implementation 'com.h2database:h2'
 }
