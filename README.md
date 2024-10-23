@@ -2,6 +2,14 @@
 
 CashCard é uma aplicação Spring Boot que permite o gerenciamento de cartões de pagamento. Este projeto implementa um CRUD (Create, Read, Update, Delete) para gerenciar as informações dos cartões, permitindo que os usuários criem, visualizem, atualizem e excluam seus cartões de pagamento.
 
+## Javadoc
+
+Para utilizar o javadoc, rode o seguinte comando:
+
+```bash
+./gradlew JavaDoc
+```
+
 ## Funcionalidades
 
 - **Gerenciamento de Cartões**: Permite que os usuários adicionem, visualizem, atualizem e excluam seus cartões de pagamento.
