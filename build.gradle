@@ -34,9 +34,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
   
-  implementation 'org.springframework.data:spring-data-jdbc'
-  implementation 'com.h2database:h2'
-  implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.data:spring-data-jdbc'
+    implementation 'com.h2database:h2'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 }
 
 tasks.named('bootBuildImage') {
@@ -45,4 +45,21 @@ tasks.named('bootBuildImage') {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+
+
+tasks.withType(Javadoc) {
+    // Charset UTF-8 para suportar caracteres especiais nos comentários
+    options.encoding = 'UTF-8'
+
+    // Incluir todos os arquivos .java nas pastas de origem
+    source = sourceSets.main.allJava
+
+    // Adicionando links para a documentação do JDK
+    options.links("https://docs.oracle.com/en/java/javase/21/docs/api/")
+
+    // Outras opções, se necessário
+    options.memberLevel = JavadocMemberLevel.PRIVATE // ou PROTECTED para incluir membros protegidos
+    options.windowTitle = 'Meu Projeto Javadoc'
 }

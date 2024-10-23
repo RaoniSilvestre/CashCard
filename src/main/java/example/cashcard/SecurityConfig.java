@@ -12,9 +12,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Configuração de segurança da aplicação.
+ * 
+ * Define as regras de segurança para o acesso aos endpoints e usuários em memória.
+ */
 @Configuration
 class SecurityConfig {
-
+    /**
+     * Define a cadeia de filtros de segurança para proteger os endpoints da aplicação.
+     * 
+     * A rota "cashcards/**" requer autenticação com a role "CARD-OWNER". Utiliza
+     * autenticação básica HTTP (HTTP Basic).
+     * 
+     * @param http o objeto HttpSecurity para configurar as regras de segurança.
+     * @return a configuração finalizada do filtro de segurança.
+     * @throws Exception caso ocorra um erro na configuração de segurança.
+     */
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -26,6 +40,15 @@ class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Define um serviço de usuários em memória para fins de teste.
+     * 
+     * Cria dois usuários: "sarah1" com a role "CARD-OWNER" e "hank-owns-no-cards"
+     * com a role "NON-OWNER".
+     * 
+     * @param passwordEncoder o codificador de senhas usado para criptografar as senhas dos usuários.
+     * @return um serviço de gerenciamento de usuários em memória.
+     */
     @Bean
     UserDetailsService testOnlyUser(PasswordEncoder passwordEncoder) {
         User.UserBuilder users = User.builder();
@@ -44,6 +67,12 @@ class SecurityConfig {
         return new InMemoryUserDetailsManager(sarah, hankOwnsNoCards);
     }
 
+    
+    /**
+     *  Encoder básico de senhas
+     *
+     * @return PasswordEncoder
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
